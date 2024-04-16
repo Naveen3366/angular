@@ -1,15 +1,120 @@
-<h3>Happy to see you!</h3>
 <div class="container">
-  <h1>Install Bootstrap 5 in Angular 17 - ItSolutionStuff.com</h1>
-  
-  <div class="card">
-    <div class="card-header">
-      Featured
+  <div class="row custm">
+    <div class="col-6">
+      <h3>Student Registeration</h3>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text text-danger">With supporting text below as a natural lead-in to additional content.</p>      
-      <a href="#" class="btn btn-primary">Go somewhere else</a>
+    <div class="col-6 text-end">
+      <button class="btn btn-outline-success" (click)="openmodel()">Add New</button>
+    </div>
+  </div>
+  
+  @if (studentData.length !== 0) {
+    <div class="row">
+      @for (item of studentData; track $index) {
+        <div class="col-3">
+          <div class="card custm">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6">
+                  {{item.name}}
+                </div>
+                <div class="col-6 text-end">
+                  {{item.mobileNo}}
+                </div>
+              </div>
+            </div>
+            <div class="card-body">          
+              <p>{{item.city}}, {{item.state}}, {{item.pincode}}</p>
+              <p>{{item.address}}</p>
+            </div>
+            <div class="card-footer text-center">
+              <div class="row">
+                <div class="col-12">
+                  {{item.email}}
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="onEdit(item)">Edit</button>
+                  </div>
+                  <div class="col-4"></div>
+                  <div class="col-4">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="onDelete(item)">Delete</button>
+                  </div>
+              </div>            
+            </div>
+          </div>
+        </div>
+      }
+      </div>
+    }
+    @else {
+      <div class="row">
+        <div class="col-12 text-center top-15px">
+          <p class="Norecord">No Record Found. Create a new one!</p>
+        </div>
+      </div>
+    }
+  </div>
+
+
+<!-- -------          Modal          -------  -->
+
+<div class="modal" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Student details</h4>
+        <button type="button" class="btn-close" (click)="closemodel()"></button>
+      </div>      
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-8">
+            <label for="nme">Name</label>
+            <input type="text" [(ngModel)]="studentObj.name" name="name" autocomplete="off" class="form-control" placeholder="Name" id="nme">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="mno">MobileNo</label>
+            <input type="text" [(ngModel)]="studentObj.mobileNo" name="MobileNo" autocomplete="off" class="form-control" placeholder="MobileNo" id="mno">
+          </div>
+          <div class="col-6">
+            <label for="Email">E-mail</label>
+            <input type="text" [(ngModel)]="studentObj.email" name="E-mail" autocomplete="off" class="form-control" placeholder="E-mail" id="Email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label for="cty">City</label>
+            <input type="text" [(ngModel)]="studentObj.city" name="City" autocomplete="off" class="form-control" placeholder="City" id="cty">
+          </div>
+          <div class="col-4">
+            <label for="ste">State</label>
+            <input type="text" [(ngModel)]="studentObj.state" name="State" autocomplete="off" class="form-control" placeholder="State" id="ste">
+          </div>
+          <div class="col-4">
+            <label for="Pcode">Pincode</label>
+            <input type="text" [(ngModel)]="studentObj.pincode" name="Pincode" autocomplete="off" class="form-control" placeholder="Pincode" id="Pcode">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="Adrss">Address</label>
+            <textarea rows="3" [(ngModel)]="studentObj.address" name="Address" autocomplete="off" class="form-control" placeholder="Address" id="Adrss"></textarea>
+          </div>
+        </div>
+      </div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closemodel()">Close</button>
+
+        @if(studentObj.id == 0){
+          <button type="button" class="btn btn-outline-success" (click)="savestudent()">Save</button>
+        }@else {
+          <button type="button" class="btn btn-info" (click)="update()">Update</button>
+        }
+
+      </div>
     </div>
   </div>
 </div>

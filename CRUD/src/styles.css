@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #f3f6fb;
+}
+.custm{
+    margin-top: 55px !important;
+}
+
+.card-header{
+    background-color: #ffff !important;
+}
+.Norecord{
+margin-top: 217px !important;
+font-size: large !important;
+}
